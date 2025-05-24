@@ -1,0 +1,48 @@
+version: '3.8'
+
+services:
+  vault-proxy:
+    image: hashicorp/vault:1.19.4
+    container_name: vault-proxy
+    volumes:
+      - vault_data:/vault
+      - ./f.hcl:/vault/f.hcl
+      - ./token:/tmp
+    ports:
+      - "8100:8100"
+    cap_add:
+      - IPC_LOCK
+    environment:
+      - VAULT_ADDR=http://192.168.112.130:8200
+      - VAULT_ROLE_ID=b7623aa3-95ce-ac06-a863-0a5d870eddc8
+      - VAULT_SECRET_ID=9c8c593f-cad3-e786-e16b-381297cab77f
+      - VAULT_PROXY_SHARE_TOKEN=true
+      - VAULT_PROXY_TOKEN_PATH=/tmp/vault_token
+      - VAULT_TOKEN_POLICIES=default,appset-policy
+      - VAULT_TOKEN_TTL=90s
+    command: sh -c "echo $${VAULT_ROLE_ID} > /tmp/role_id && echo $${VAULT_SECRET_ID} > /tmp/secret_id && vault proxy -config=/vault/f.hcl"
+    restart: unless-stopped
+    networks:
+      - vault-proxy-net
+
+  python-app:
+    build: .
+    volumes:
+      - .:/app
+      - ./token:/tmp
+    environment:
+      - VAULT_PROXY_ADDR=http://vault-proxy:8100
+      - VAULT_TOKEN_PATH=/tmp/vault_token
+      - SECRET_PATH=secret/data/appset
+    networks:
+      - vault-proxy-net
+    depends_on:
+      - vault-proxy
+
+
+volumes:
+  vault_data:
+networks:
+  vault-proxy-net:
+    name: vault-proxy-net
+    driver: bridge
