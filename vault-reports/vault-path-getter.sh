@@ -1,5 +1,5 @@
 #!/bin/bash
-
+#this script has been used to find all vault secrets path in a specific DC, I've written it to check their path for some reports
 VAULT_PREFIX="ats/"
 declare -A VAULT_URLS=(
     ["asiatech"]="https://<asiatech-url>"
