@@ -5,7 +5,8 @@ declare -A VAULT_URLS=(
     ["asiatech"]="https://<asiatech-url>"
     ["shatel"]="https://<shatel-url>/"
 )
-VAULT_USERNAME="ats-admin"
+#if you define different users in these DC vaults you need to add a user for each DC env
+VAULT_USERNAME="<myuser>"
 VAULT_SKIP_VERIFY="true"
 
 login_to_dc() {
