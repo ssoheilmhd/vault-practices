@@ -13,7 +13,7 @@ services:
     cap_add:
       - IPC_LOCK
     environment:
-      - VAULT_ADDR=http://192.168.112.130:8200
+      - VAULT_ADDR=http://<Vault-Addr>:<Vault-Port>
       - VAULT_ROLE_ID=b7623aa3-95ce-ac06-a863-0a5d870eddc8
       - VAULT_SECRET_ID=9c8c593f-cad3-e786-e16b-381297cab77f
       - VAULT_PROXY_SHARE_TOKEN=true
