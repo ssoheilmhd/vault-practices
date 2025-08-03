@@ -24,5 +24,5 @@ listener "tcp" {
 
 
 vault {
-  address = "http://192.168.112.130:8200"
+  address = "http:/<Vault-Addr>:<Vault-Port>"
 }
