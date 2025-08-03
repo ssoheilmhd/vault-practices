@@ -1,7 +1,7 @@
 FROM python:3.9-slim
 
 ENV PYTHONUNBUFFERED=1 \
-    VAULT_PROXY_ADDR="http://192.168.112.130:8100"
+    VAULT_PROXY_ADDR="http://<IP>:<Port>"
 
 RUN pip install --no-cache-dir hvac python-dotenv
 
