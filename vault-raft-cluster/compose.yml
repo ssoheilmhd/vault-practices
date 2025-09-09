@@ -1,12 +1,12 @@
 version: '3.8'
 
 services:
-  vault-node3:
+  vault-node:
     user: "1000:1000"
     image: repo.asax.ir/hashicorp/vault:1.20.3
-    container_name: <vaultcontainername>
+    container_name: vault-node
     ports:
-      - "8200:8200"  # User communication port
+      - "8200:8200"
       - "8201:8201"  # Cluster communication port
     volumes:
       - ./config:/vault/config
@@ -19,29 +19,9 @@ services:
     networks:
       vault-net:
     restart: unless-stopped
-
-
-  keepalived-node1:
-    image: repo.asax.ir/osixia/keepalived:2.0.20
-    container_name: keepalived-node1
-    network_mode: host
-    cap_add:
-      - NET_ADMIN
-      - NET_BROADCAST
-      - NET_RAW
-    volumes:
-      - ./keepalived/check_vault_leader.sh:/usr/bin/check_vault_leader.sh
-    environment:
-      - KEEPALIVED_INTERFACE=ens37
-      - KEEPALIVED_VIRTUAL_IPS=10.20.30.123
-      - KEEPALIVED_UNICAST_PEERS=10.20.30.1,10.20.30.2,10.20.30.3
-      - KEEPALIVED_PRIORITY=100
-      - KEEPALIVED_STATE=BACKUP
-      - KEEPALIVED_VRID=51
-    restart: unless-stopped
-
+    
 volumes:
-  vault-data-node3:
+  vault-data-node:
 
 networks:
   vault-net:
