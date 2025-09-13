@@ -19,6 +19,21 @@ services:
     networks:
       vault-net:
     restart: unless-stopped
+  keepalived:
+    image: repo.asax.ir/osixia/keepalived:2.0.20
+    container_name: keepalived
+    cap_add:
+      - NET_ADMIN
+      - NET_BROADCAST
+      - NET_RAW
+    volumes:
+      - ./keepalived/keepalived.conf:/usr/local/etc/keepalived/keepalived.conf
+      - ./keepalived/check_vault_leader.sh:/usr/bin/check_vault_leader.sh
+    network_mode: host
+    restart: unless-stopped
+    depends_on:
+      - vault-node
+
     
 volumes:
   vault-data-node:
