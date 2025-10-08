@@ -96,37 +96,6 @@ For additional nodes:
 vault status
 ```
 
-## Quick Installation
-
-### VM Requirements:
-- Shared network between three VMs
-- IP addresses configured on ens37 interface:
-  - 10.20.30.1
-  - 10.20.30.2  
-  - 10.20.30.3
-
-### Setup Steps:
-1. Clone this repository on all three VMs
-2. Modify `node.hcl` for each node (update `cluster_addr` and `node_id`)
-3. Set proper permissions:
-   ```bash
-   chown -R 1000:1000 /var/lib/docker/volumes/new-vault_vault-data-node
-   ```
-4. Make keepalived script executable:
-   ```bash
-   chmod +x check_vault_leader.sh
-   ```
-5. Start the services using Docker Compose
-6. Initialize and join cluster using the methods described above
-
-## Important Configuration Notes
-
-- **node_id**: Must be unique for each Vault node in the cluster
-- **retry_join**: Should use VIP address to ensure proper cluster joining
-- **cluster_addr**: Each node needs its own unique IP address for cluster communication
-- **api_addr**: Should point to the VIP address for proper leader routing
-- VIP management is handled through Keepalived with the provided health check script
-
 ## Troubleshooting
 
 - Ensure all nodes can communicate on ports 8200 and 8201
