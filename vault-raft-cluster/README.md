@@ -142,5 +142,3 @@ vault status
 - Implement proper SSL certificate management for nginx
 - Secure unseal keys and root tokens in a safe location
 - Regular security audits and updates recommended
-
-For more detailed information about Vault storage backends and architecture, refer to the internal documentation about Raft storage methodology and operation monitoring processes.
