@@ -3,7 +3,7 @@ version: '3.8'
 services:
   vault-node:
     user: "1000:1000"
-    image: repo.asax.ir/hashicorp/vault:1.20.3
+    image: hashicorp/vault:1.20.3
     container_name: vault-node
     ports:
       - "8200:8200"
@@ -20,7 +20,7 @@ services:
       vault-net:
     restart: unless-stopped
   keepalived:
-    image: repo.asax.ir/osixia/keepalived:2.0.20
+    image: osixia/keepalived:2.0.20
     container_name: keepalived
     cap_add:
       - NET_ADMIN
@@ -33,7 +33,21 @@ services:
     restart: unless-stopped
     depends_on:
       - vault-node
-
+  nginx:
+    image: nginx:alpine
+    container_name: nginx-vault
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./ssl/vault.crt:/etc/ssl/certs/vault.crt
+      - ./ssl/vault.key:/etc/ssl/private/vault.key
+    depends_on:
+      - vault-node
+    networks:
+      vault-net:
+    restart: unless-stopped
     
 volumes:
   vault-data-node:
