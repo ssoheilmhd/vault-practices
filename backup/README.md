@@ -73,10 +73,9 @@ export VAULT_ADDR=<destination_vault_address>
 export VAULT_TOKEN=<destination_vault_token>
 ./general-vault-restore.sh
 
-Testing
+### Testing
 
 The above documentation has been tested on migration from Vault version 1.14.8 to 1.20.3 with successful results. Please note that significant investment has been made in the Vault command behavior within these scripts, so careful attention should be paid to the source version, target version, and system Vault command version.
-Support
+### Support
 
 For issues and questions related to these migration scripts, please contact the development team.
-text
