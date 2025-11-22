@@ -43,7 +43,7 @@ The backup script captures the following information:
 export VAULT_ADDR=<source_vault_address>
 export VAULT_TOKEN=<source_vault_token>
 ./general-vault-backup.sh
-
+```
 {
   "user1": "pass1",
   "user2": "pass2",
