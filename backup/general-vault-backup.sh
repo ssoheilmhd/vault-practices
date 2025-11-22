@@ -1,5 +1,6 @@
 #!/bin/bash
-
+export VAULT_ADDR="https://vault-addr"
+export VAULT_TOKEN="vault token"
 # Function to recursively list and process secrets
 process_secrets() {
     local current_path="$1"
