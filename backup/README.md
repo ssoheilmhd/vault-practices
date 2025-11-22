@@ -37,7 +37,7 @@ The backup script captures the following information:
 - **Policies**: All policies defined for paths
 - **User's Bind Policies**: For each user, captures which policies were assigned to them
 
-### Usage
+### Backup usage
 
 ```bash
 export VAULT_ADDR=<source_vault_address>
@@ -53,7 +53,6 @@ export VAULT_TOKEN=<source_vault_token>
 ```
 ### Restoring Informations
 
-
 After completing the backup steps, run the restore script in the same directory. This script will update the new Vault based on the generated outputs.
 
 The restore script performs the following operations on the new Vault:
@@ -68,13 +67,12 @@ The restore script performs the following operations on the new Vault:
 
     User's Bind Policies: Assigns the appropriate policies to each user
 
-Usage
+### Restoring usage
 ```bash
-
 export VAULT_ADDR=<destination_vault_address>
 export VAULT_TOKEN=<destination_vault_token>
 ./general-vault-restore.sh
-
+```
 ### Testing
 
 The above documentation has been tested on migration from Vault version 1.14.8 to 1.20.3 with successful results. Please note that significant investment has been made in the Vault command behavior within these scripts, so careful attention should be paid to the source version, target version, and system Vault command version.
