@@ -68,7 +68,7 @@ The restore script performs the following operations on the new Vault:
     User's Bind Policies: Assigns the appropriate policies to each user
 
 Usage
-bash
+```bash
 
 export VAULT_ADDR=<destination_vault_address>
 export VAULT_TOKEN=<destination_vault_token>
